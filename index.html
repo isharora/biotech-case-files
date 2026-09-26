@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Files: 12 landmark drugs and 6 famous failures</title>
+<link rel="stylesheet" href="shared/style.css">
+<style>
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px 80px; }
+  .hubhero { padding: 56px 0 30px; display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 40px; align-items: end; border-bottom: 1px solid var(--rule); }
+  @media (max-width: 860px) { .hubhero { grid-template-columns: 1fr; } }
+  .hubhero h1 { font: 700 54px/1.05 var(--serif); margin: 0 0 14px; letter-spacing: -.015em; }
+  .hubhero p { font: 400 20px/1.55 var(--serif); color: var(--ink-2); margin: 0 0 10px; max-width: 38em; }
+  .me { background: var(--panel); border: 1px solid var(--rule); border-radius: 14px; padding: 16px 18px; }
+  .me .v { font: 700 30px var(--sans); } .me .l { color: var(--ink-2); font-size: 14px; }
+  .me .bar { height: 8px; background: var(--panel-2); border-radius: 99px; overflow: hidden; margin: 10px 0 4px; } .me .bar i { display: block; height: 100%; background: var(--win); }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 22px 0 10px; }
+  .seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; background: var(--panel); }
+  .seg button { border: 0; background: none; padding: 7px 14px; font-size: 14px; border-right: 1px solid var(--rule); }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .tchip { border: 1px solid var(--rule); background: var(--panel); border-radius: 999px; padding: 4px 11px; font-size: 13px; color: var(--ink-2); }
+  .tchip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .grp-h { font: 700 26px var(--serif); margin: 34px 0 4px; display: flex; align-items: center; gap: 12px; }
+  .grp-p { color: var(--ink-2); font: 400 17px/1.5 var(--serif); margin: 0 0 16px; max-width: 46em; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 16px; }
+  .ccard { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--rule); border-radius: 16px; overflow: hidden; text-decoration: none; color: var(--ink); transition: transform .15s ease, box-shadow .15s ease; }
+  .ccard:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.08); }
+  .ccard .art { background: var(--il-bg); aspect-ratio: 16 / 10; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid var(--rule); position: relative; }
+  .ccard .art svg { height: 88%; width: auto; }
+  .ccard .art .k { position: absolute; top: 10px; left: 10px; }
+  .ccard .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .ccard h3 { font: 700 21px/1.2 var(--serif); margin: 0; }
+  .ccard .gen { font-size: 13.5px; color: var(--ink-3); }
+  .ccard .tag { font: 400 15.5px/1.5 var(--serif); color: var(--ink-2); flex: 1; }
+  .ccard .meta { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .ccard .meta span { font-size: 12px; padding: 2px 8px; border-radius: 99px; background: var(--panel-2); color: var(--ink-2); }
+  .ccard .prog { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
+  .ccard .prog .bar { flex: 1; height: 5px; background: var(--panel-2); border-radius: 99px; overflow: hidden; } .ccard .prog .bar i { display: block; height: 100%; background: var(--win); }
+  .ccard.pending { opacity: .5; pointer-events: none; }
+  .across { margin-top: 56px; }
+  .across h2 { font: 700 32px var(--serif); margin: 0 0 6px; }
+  .across > p { font: 400 18px/1.55 var(--serif); color: var(--ink-2); max-width: 44em; margin: 0 0 18px; }
+  .panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 16px; padding: 18px 20px; margin-bottom: 18px; }
+  .panel h3 { font: 650 17px var(--sans); margin: 0 0 4px; } .panel .sub { color: var(--ink-3); font-size: 14px; margin-bottom: 10px; }
+  table.cmp th { cursor: pointer; white-space: nowrap; user-select: none; }
+  table.cmp td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  .matrix { overflow-x: auto; }
+  .matrix table { border-collapse: collapse; font-size: 13px; }
+  .matrix th { font-weight: 500; color: var(--ink-2); padding: 4px 6px; }
+  .matrix th.rot { height: 120px; vertical-align: bottom; } .matrix th.rot div { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+  .matrix td { width: 30px; height: 26px; text-align: center; border: 1px solid var(--rule-2); }
+  .matrix td .d { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
+  .matrix tr:hover td, .matrix tr:hover th { background: var(--wash); }
+  .foot { margin-top: 50px; color: var(--ink-3); font-size: 14px; border-top: 1px solid var(--rule); padding-top: 18px; }
+</style>
+</head>
+<body>
+<div class="topbar"><a class="home" href="index.html">Case Files</a><span class="crumb">12 landmark drugs · 6 famous failures</span><span class="spacer"></span><button class="btn" id="themeBtn">◐ Theme</button></div>
+<div class="wrap">
+  <header class="hubhero">
+    <div>
+      <h1>Case Files</h1>
+      <p>Eighteen drugs, told from the biology up: twelve that changed medicine, and six that failed in ways the industry still learns from.</p>
+    </div>
+    <div class="me" id="me"></div>
+  </header>
+  <div class="filters" id="filters"></div>
+  <div id="groups"></div>
+  <section class="across" id="across"></section>
+  <div class="foot">Every case lists its sources. Survival curves are schematic, drawn from reported results rather than digitized, and money figures are in nominal US dollars unless stated. Your reading progress and quiz scores are saved in this browser only.</div>
+</div>
+<script src="shared/cases-index.js"></script>
+<script src="shared/glossary.js"></script>
+<script src="shared/engine.js"></script>
+<script>
+const {esc, fmt, store} = CF;
+CF.wireTips();
+document.getElementById('themeBtn').onclick = CF.toggleTheme;
+const THEMES = {'biomarkers': 'Biomarkers', 'surrogate-endpoints': 'Surrogate endpoints', 'pricing': 'Pricing', 'platform': 'Platforms', 'speed': 'Speed', 'safety': 'Safety', 'regulatory': 'Regulators', 'dealmaking': 'Dealmaking', 'manufacturing': 'Manufacturing', 'patient-advocacy': 'Patient advocacy', 'competition': 'Competition', 'biology-surprise': 'Biology surprises'};
+const AREAS = {oncology: 'Cancer', immunology: 'Immunology', metabolic: 'Metabolic', neuro: 'Brain & nerves', rare: 'Rare disease', infectious: 'Infectious disease', cardio: 'Heart'};
+const S = {kind: 'all', theme: null};
+let loaded = 0;
+// load every case file; missing ones just show as "in preparation"
+CASE_INDEX.forEach(k => { const sc = document.createElement('script'); sc.src = `cases/${k.id}.js`; sc.onload = sc.onerror = () => { if (++loaded === CASE_INDEX.length) render(); }; document.head.appendChild(sc); });
+
+function render() {
+  const all = CASE_INDEX.map(k => ({...k, c: CASES[k.id]}));
+  // progress panel
+  const read = all.filter(k => (store.get('progress:' + k.id, 0) || 0) >= 80).length, quizzes = all.map(k => store.get('quiz:' + k.id, null)).filter(Boolean);
+  const qp = quizzes.length ? Math.round(100 * quizzes.reduce((a, q) => a + q.right, 0) / quizzes.reduce((a, q) => a + q.total, 0)) : null;
+  document.getElementById('me').innerHTML = `<div class="l">Your progress</div><div class="v">${read} / ${all.length}</div><div class="bar"><i style="width:${100 * read / all.length}%"></i></div>
+    <div class="l">cases read${quizzes.length ? ` · ${quizzes.length} quizzes taken, ${qp}% correct` : ''}</div>`;
+  // filters
+  const themesUsed = [...new Set(all.flatMap(k => (k.c && k.c.themes) || []))].filter(t => THEMES[t]);
+  document.getElementById('filters').innerHTML = `<span class="seg">${[['all', 'All 18'], ['success', 'Landmarks'], ['failure', 'Cautionary tales']].map(([k, l]) => `<button data-kind="${k}" aria-pressed="${S.kind === k}">${l}</button>`).join('')}</span>
+    <span style="color:var(--ink-3);font-size:14px;margin-left:8px">Lesson:</span>${themesUsed.map(t => `<button class="tchip" data-theme="${t}" aria-pressed="${S.theme === t}">${THEMES[t]}</button>`).join('')}`;
+  document.getElementById('filters').onclick = e => { const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.kind) S.kind = b.dataset.kind; if (b.dataset.theme) S.theme = S.theme === b.dataset.theme ? null : b.dataset.theme; render(); };
+  const show = k => (S.kind === 'all' || k.kind === S.kind) && (!S.theme || (k.c && (k.c.themes || []).includes(S.theme)));
+  const card = k => {
+    const c = k.c, p = store.get('progress:' + k.id, 0) || 0, q = store.get('quiz:' + k.id, null);
+    if (!c) return `<div class="ccard pending"><div class="art"><span class="badge ${k.kind} k">${k.kind === 'failure' ? 'Cautionary' : 'Landmark'}</span></div><div class="body"><h3>${esc(k.brand)}</h3><div class="tag">In preparation.</div></div></div>`;
+    const yr = c.facts && (c.facts.approval || c.facts.end);
+    return `<a class="ccard" href="case.html?id=${k.id}"><div class="art">${c.emblem || ''}<span class="badge ${k.kind} k">${k.kind === 'failure' ? 'Cautionary' : 'Landmark'}</span></div>
+      <div class="body"><h3>${esc(c.brand)}</h3><div class="gen">${esc(c.generic || '')} · ${esc(c.company || '')}</div><div class="tag">${esc(String(c.tagline || '').replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (m, a, b) => b || a).replace(/<[^>]+>/g, ''))}</div>
+      <div class="meta">${c.facts && AREAS[c.facts.area] ? `<span>${AREAS[c.facts.area]}</span>` : ''}${c.facts && c.facts.modality ? `<span>${esc(c.facts.modality)}</span>` : ''}${yr ? `<span>${yr}</span>` : ''}<span>${c.readingTime || 30} min</span></div>
+      <div class="prog"><div class="bar"><i style="width:${p}%"></i></div>${q ? `quiz ${q.right}/${q.total}` : p ? p + '% read' : 'not started'}</div></div></a>`;
+  };
+  const grp = (kind, title, blurb) => { const ks = all.filter(k => k.kind === kind && show(k)); return ks.length ? `<h2 class="grp-h"><span class="badge ${kind}">${kind === 'failure' ? 'Cautionary tales' : 'Landmarks'}</span>${title}</h2><p class="grp-p">${blurb}</p><div class="cards">${ks.map(card).join('')}</div>` : ''; };
+  document.getElementById('groups').innerHTML =
+    grp('success', 'Twelve drugs that changed medicine', 'Roughly in order of approval, from the first targeted cancer drug to the first drug to slow Alzheimer\'s. Each one also changed the business: pricing, platforms, deals, or how trials are run.') +
+    grp('failure', 'Six failures worth studying', 'A safety signal found after launch, a first-in-human disaster, an approved product nobody wanted, a biomarker that lied, a whole field chasing one weak signal, and a regulatory decision that damaged trust.');
+  renderAcross(all.filter(k => k.c));
+}
+
+function renderAcross(ks) {
+  const el = document.getElementById('across');
+  if (!ks.length) { el.innerHTML = ''; return; }
+  ks.forEach(k => { if (k.c.facts && !k.c.facts.start && k.c.facts.firstHuman) k.c.facts.start = k.c.facts.firstHuman; });   // no research-start year: begin the lane at first dosing
+  const withF = ks.filter(k => k.c.facts && k.c.facts.start);
+  // 1. timeline lanes
+  const now = new Date().getFullYear(), y0 = Math.min(...withF.map(k => k.c.facts.start)), y1 = now;
+  const Wd = 1000, L = 150, R = 20, lh = 26, H = withF.length * lh + 40, X = y => L + (Wd - L - R) * (y - y0) / (y1 - y0);
+  const lanes = withF.slice().sort((a, b) => a.c.facts.start - b.c.facts.start);
+  let svg = `<svg class="chart" viewBox="0 0 ${Wd} ${H}" width="100%" role="img" aria-label="Timeline of all cases">`;
+  for (let y = Math.ceil(y0 / 10) * 10; y <= y1; y += 10) svg += `<line class="grid" x1="${X(y)}" x2="${X(y)}" y1="0" y2="${H - 24}"/><text x="${X(y)}" y="${H - 6}" text-anchor="middle">${y}</text>`;
+  lanes.forEach((k, i) => {
+    const f = k.c.facts, y = i * lh + 8, win = k.kind === 'success', endY = f.end || (win ? now : (f.approval || now));
+    const col = win ? 'var(--win)' : 'var(--loss)';
+    svg += `<text class="lbl" x="${L - 10}" y="${y + 13}" text-anchor="end">${esc(k.c.brand)}</text>`;
+    svg += `<rect x="${X(f.start)}" y="${y + 4}" width="${Math.max(2, X(f.approval || endY) - X(f.start))}" height="12" rx="6" fill="${col}" opacity=".35"/>`;
+    if (f.approval) svg += `<rect x="${X(f.approval)}" y="${y + 4}" width="${Math.max(2, X(endY) - X(f.approval))}" height="12" rx="6" fill="${col}"/>`;
+    if (f.firstHuman) svg += `<circle cx="${X(f.firstHuman)}" cy="${y + 10}" r="4" fill="var(--panel)" stroke="${col}" stroke-width="2"/>`;
+    if (f.end) svg += `<path d="M${X(f.end) - 5},${y + 5}l10,10M${X(f.end) + 5},${y + 5}l-10,10" stroke="var(--loss)" stroke-width="2.5"/>`;
+    const tip = `<b>${esc(k.c.brand)}</b><br>Science begins: ${f.start}${f.firstHuman ? '<br>First in humans: ' + f.firstHuman : ''}${f.approval ? '<br>Approved: ' + f.approval : ''}${f.end ? '<br>Stopped or withdrawn: ' + f.end : ''}${f.approval ? `<br><span class="m">${f.approval - f.start} years from first science to approval</span>` : ''}`;
+    svg += `<rect class="hit" x="0" y="${y}" width="${Wd}" height="${lh}" data-tip="${esc(tip)}" style="cursor:pointer" onclick="location.href='case.html?id=${k.id}'"/>`;
+  });
+  svg += '</svg>';
+  // 2. comparison table
+  const cols = [['brand', 'Drug', k => k.c.brand], ['kind', 'Outcome', k => k.kind === 'failure' ? 'Cautionary' : 'Landmark'], ['area', 'Area', k => AREAS[(k.c.facts || {}).area] || ''],
+    ['mod', 'Modality', k => (k.c.facts || {}).modality || ''], ['yrs', 'Years to approval', k => (k.c.facts || {}).approval && k.c.facts.start ? k.c.facts.approval - k.c.facts.start : null],
+    ['n', 'Pivotal trial size', k => (k.c.facts || {}).pivotalN ?? null], ['sales', 'Peak sales ($B/yr)', k => (k.c.facts || {}).peakSalesB ?? null]];
+  const sortKey = S.sort || 'yrs', dir = S.dir || 1, get = cols.find(c => c[0] === sortKey)[2];
+  const rows = ks.slice().sort((a, b) => { const x = get(a), y = get(b); if (x == null) return 1; if (y == null) return -1; return (typeof x === 'number' ? x - y : String(x).localeCompare(y)) * dir; });
+  const table = `<div class="tbl-wrap"><table class="tbl cmp"><thead><tr>${cols.map(([k, l]) => `<th data-k="${k}">${l}${k === sortKey ? (dir > 0 ? ' ▲' : ' ▼') : ''}</th>`).join('')}</tr></thead><tbody>
+    ${rows.map(k => `<tr>${cols.map(([c, l, g], i) => { const v = g(k); return i === 0 ? `<td><a href="case.html?id=${k.id}">${esc(v)}</a></td>` : `<td class="${typeof v === 'number' ? 'n' : ''}">${v == null ? '–' : typeof v === 'number' ? fmt(v, v % 1 ? 1 : 0) : esc(v)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
+  // 3. theme matrix
+  const themes = Object.keys(THEMES).filter(t => ks.some(k => (k.c.themes || []).includes(t)));
+  const matrix = `<div class="matrix"><table><thead><tr><th></th>${themes.map(t => `<th class="rot"><div>${THEMES[t]}</div></th>`).join('')}</tr></thead><tbody>
+    ${ks.map(k => `<tr><th style="text-align:right"><a href="case.html?id=${k.id}">${esc(k.c.brand)}</a></th>${themes.map(t => `<td>${(k.c.themes || []).includes(t) ? `<span class="d" style="background:${k.kind === 'failure' ? 'var(--loss)' : 'var(--win)'}" data-tip="${esc(`<b>${esc(k.c.brand)}</b>: ${THEMES[t]}`)}"></span>` : ''}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  el.innerHTML = `<h2>Across the cases</h2><p>The same few forces keep recurring: the right target, the right patients, the right endpoint, and a price someone will pay. Compare the cases side by side.</p>
+    <div class="panel"><h3>From first science to approval (or failure)</h3><div class="sub">Faint bar: research and development. Solid bar: on the market. Open circle: first dose in humans. ✕: stopped or withdrawn. Click a row to open the case.</div>
+      <div class="legend"><span><span class="sw" style="background:var(--win)"></span>Landmark</span><span><span class="sw" style="background:var(--loss)"></span>Cautionary tale</span></div>${svg}</div>
+    <div class="panel"><h3>Side by side</h3><div class="sub">Click a column to sort.</div>${table}</div>
+    <div class="panel"><h3>Which lessons each case teaches</h3><div class="sub">Pick a lesson in the filters above to see only those cases.</div>${matrix}</div>`;
+  el.querySelector('table.cmp thead').onclick = e => { const th = e.target.closest('th'); if (!th) return; S.dir = S.sort === th.dataset.k ? -(S.dir || 1) : 1; S.sort = th.dataset.k; renderAcross(ks); };
+}
+</script>
+</body>
+</html>

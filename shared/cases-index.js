@@ -1,0 +1,21 @@
+// Reading order: landmarks roughly by approval year, then cautionary tales by year. Used for next/previous links and the hub.
+window.CASE_INDEX = [
+  {id: 'gleevec', brand: 'Gleevec', kind: 'success'},
+  {id: 'humira', brand: 'Humira', kind: 'success'},
+  {id: 'sovaldi', brand: 'Sovaldi', kind: 'success'},
+  {id: 'keytruda', brand: 'Keytruda', kind: 'success'},
+  {id: 'spinraza', brand: 'Spinraza', kind: 'success'},
+  {id: 'kymriah', brand: 'Kymriah', kind: 'success'},
+  {id: 'ozempic', brand: 'Ozempic & Wegovy', kind: 'success'},
+  {id: 'zolgensma', brand: 'Zolgensma', kind: 'success'},
+  {id: 'trikafta', brand: 'Trikafta', kind: 'success'},
+  {id: 'enhertu', brand: 'Enhertu', kind: 'success'},
+  {id: 'comirnaty', brand: 'Comirnaty', kind: 'success'},
+  {id: 'leqembi', brand: 'Leqembi', kind: 'success'},
+  {id: 'vioxx', brand: 'Vioxx', kind: 'failure'},
+  {id: 'tgn1412', brand: 'TGN1412', kind: 'failure'},
+  {id: 'exubera', brand: 'Exubera', kind: 'failure'},
+  {id: 'torcetrapib', brand: 'Torcetrapib', kind: 'failure'},
+  {id: 'epacadostat', brand: 'Epacadostat', kind: 'failure'},
+  {id: 'aduhelm', brand: 'Aduhelm', kind: 'failure'},
+];
