@@ -72,7 +72,7 @@
   }
   const dp = v => v % 1 === 0 ? 0 : Math.abs(v) < 10 ? (Math.abs(Math.round(v * 10) - v * 10) < 1e-9 ? 1 : 2) : 1;
   const tickFmt = (v, u = '') => ['$B', '$M', '%'].includes(u) ? unitFmt(v, u) : fmt(v, dp(v));   // word units only on value labels, not ticks
-  const unitFmt = (v, u = '') => u === '$B' ? '$' + fmt(v, dp(v)) + 'B' : u === '$M' ? '$' + fmt(v) + 'M' : u === '%' ? fmt(v, dp(v)) + '%' : fmt(v, dp(v)) + (u ? ' ' + u : '');
+  const unitFmt = (v, u = '') => u === '$B' ? '$' + fmt(v, dp(v)) + 'B' : u === '$M' ? '$' + fmt(v, dp(v)) + 'M' : u === '%' ? fmt(v, dp(v)) + '%' : fmt(v, dp(v)) + (u ? ' ' + u : '');
   function legendHtml(series, line) {
     if (series.length < 2) return '';
     return `<div class="legend">${series.map((s, i) => `<span><span class="${line ? 'ln' : 'sw'}" style="background:${color(s.color != null ? s.color - 1 : i)}"></span>${esc(s.name)}</span>`).join('')}</div>`;
@@ -153,7 +153,7 @@
     const tipFor = (c, se, v, i) => esc(`<b>${esc(c)}</b>${series.length > 1 ? ' · ' + esc(se.name) : ''}<br>${unitFmt(v, spec.unit)}${se.notes && se.notes[i] ? '<br><span class=m>' + esc(se.notes[i]) + '</span>' : ''}`);
     let s;
     if (horiz) {
-      const Wd = 720, L = spec.labelWidth || 170, R = 70, bh = spec.barHeight || (series.length > 1 ? 16 : 24), gh = bh * series.length + 14, H = cats.length * gh + 24;
+      const Wd = 720, L = spec.labelWidth || Math.min(320, Math.max(110, 16 + 7 * Math.max(...cats.map(c => String(c).length)))), R = 70,   /* label area fits the longest category */ bh = spec.barHeight || (series.length > 1 ? 16 : 24), gh = bh * series.length + 14, H = cats.length * gh + 24;
       const Xv = v => L + 10 + (Wd - L - 10 - R) * (v - lo) / span, X0 = Xv(0);
       s = `<svg class="chart" viewBox="0 0 ${Wd} ${H}" width="100%" role="img" aria-label="${esc(spec.title || 'chart')}">`;
       ticks.forEach(v => s += `<line class="grid" x1="${Xv(v)}" x2="${Xv(v)}" y1="0" y2="${H - 20}"/><text x="${Xv(v)}" y="${H - 4}" text-anchor="middle">${tickFmt(v, spec.unit)}</text>`);
@@ -403,17 +403,18 @@
   W.CF.API = API;
 
   // ---------- page ----------
+  const KIND_LABEL = {success: 'Landmark', failure: 'Cautionary tale', frontier: 'Frontier'}, KIND_BADGE = {success: 'Landmark drug', failure: 'Cautionary tale', frontier: 'Frontier'};
   function renderCase(c) {
     GLOSS = {};
     Object.entries(W.GLOSSARY || {}).concat(Object.entries(c.glossary || {})).forEach(([k, v]) => GLOSS[k.toLowerCase()] = {term: k, def: v});
     document.title = `${c.brand} · Case Files`;
     const idx = W.CASE_INDEX || [], pos = idx.findIndex(k => k.id === c.id);
-    document.body.innerHTML = `<div class="topbar"><a class="home" href="index.html">Case Files</a><span class="crumb">${c.kind === 'failure' ? 'Cautionary tale' : 'Landmark'} · ${esc(c.brand)}</span><span class="spacer"></span><button class="btn" id="themeBtn">◐ Theme</button><div class="progress"></div></div>
+    document.body.innerHTML = `<div class="topbar"><a class="home" href="index.html">Case Files</a><span class="crumb">${KIND_LABEL[c.kind] || 'Landmark'} · ${esc(c.brand)}</span><span class="spacer"></span><button class="btn" id="themeBtn">◐ Theme</button><div class="progress"></div></div>
       <div class="layout"><nav class="toc"><div class="toc-h">In this case</div></nav><main></main></div>`;
     $('#themeBtn').onclick = toggleTheme;
     const main = $('main'), toc = $('.toc');
     const hero = el('header', 'hero');
-    hero.innerHTML = `<div><span class="badge ${c.kind}">${c.kind === 'failure' ? 'Cautionary tale' : 'Landmark drug'}</span>
+    hero.innerHTML = `<div><span class="badge ${c.kind}">${KIND_BADGE[c.kind] || 'Landmark drug'}</span>
       <h1>${esc(c.brand)}</h1><div class="generic">${esc(c.generic || '')}${c.company ? ' · ' + esc(c.company) : ''}</div>
       <p class="tagline">${terms(c.tagline)}</p>
       <div class="chips">${(c.chips || []).map(([k, v]) => `<span class="chip">${esc(k)}: <b>${terms(v)}</b></span>`).join('')}</div>

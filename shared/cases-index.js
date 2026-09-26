@@ -1,9 +1,10 @@
-// Reading order: landmarks roughly by approval year, then cautionary tales by year. Used for next/previous links and the hub.
+// Reading order: landmarks roughly by approval year, then cautionary tales by year, then the frontier. Used for next/previous links and the hub.
 window.CASE_INDEX = [
   {id: 'gleevec', brand: 'Gleevec', kind: 'success'},
   {id: 'humira', brand: 'Humira', kind: 'success'},
   {id: 'sovaldi', brand: 'Sovaldi', kind: 'success'},
   {id: 'keytruda', brand: 'Keytruda', kind: 'success'},
+  {id: 'repatha', brand: 'Repatha', kind: 'success'},
   {id: 'spinraza', brand: 'Spinraza', kind: 'success'},
   {id: 'kymriah', brand: 'Kymriah', kind: 'success'},
   {id: 'ozempic', brand: 'Ozempic & Wegovy', kind: 'success'},
@@ -12,10 +13,14 @@ window.CASE_INDEX = [
   {id: 'enhertu', brand: 'Enhertu', kind: 'success'},
   {id: 'comirnaty', brand: 'Comirnaty', kind: 'success'},
   {id: 'leqembi', brand: 'Leqembi', kind: 'success'},
+  {id: 'casgevy', brand: 'Casgevy', kind: 'success'},
+  {id: 'thalidomide', brand: 'Thalidomide', kind: 'failure'},
   {id: 'vioxx', brand: 'Vioxx', kind: 'failure'},
   {id: 'tgn1412', brand: 'TGN1412', kind: 'failure'},
   {id: 'exubera', brand: 'Exubera', kind: 'failure'},
   {id: 'torcetrapib', brand: 'Torcetrapib', kind: 'failure'},
   {id: 'epacadostat', brand: 'Epacadostat', kind: 'failure'},
+  {id: 'zemdri', brand: 'Zemdri', kind: 'failure'},
   {id: 'aduhelm', brand: 'Aduhelm', kind: 'failure'},
+  {id: 'rentosertib', brand: 'Rentosertib', kind: 'frontier'},
 ];

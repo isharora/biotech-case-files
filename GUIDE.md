@@ -13,7 +13,7 @@ Open `cases/demo.js` to see every section type used once. Render it with `shared
 ```js
 registerCase({
   id: 'keytruda',                 // must match the file name and the id in shared/cases-index.js
-  kind: 'success',                // 'success' | 'failure'
+  kind: 'success',                // 'success' | 'failure' | 'frontier' (unapproved, story still unfolding)
   brand: 'Keytruda', generic: 'pembrolizumab', company: 'Merck & Co. (MSD)',
   tagline: 'One sentence that makes the reader want to keep going. May use [[terms]].',
   chips: [['Disease', '...'], ['Modality', '[[monoclonal antibody]]'], ['Target', 'PD-1'], ['Approved', '2014']],
@@ -129,7 +129,17 @@ This is a study resource; a wrong fact is worse than a missing one.
 
 ---
 
-## 7. Check your work (required, repeatedly)
+## 7. Engine notes (current behaviour, so you don't need workarounds)
+
+- **Timeline order:** events sort by `year`, then by a parsed `date` when it names a month ("Mar 2015", "March 13, 2006", "07/11/2014"). Use plain integer years plus a `date` string; you don't need fractional years. Loose text like "Late 2006" keeps its year position.
+- **Bar charts** support negative values, and values under 10 show up to two decimals (0.63 stays 0.63). Word units such as "months" appear on value labels but not on axis ticks. The left margin grows to fit long tick labels.
+- **Line charts** are clamped at `yMax`.
+- **Trial arms** show a name plus two lines of description (about 36 characters each).
+- **Mechanism diagrams** render full column width (about 900 px for a 760-wide viewBox), with the step text below. Use normal label sizes (13–16 units); don't enlarge the fonts.
+- **Quiz and predict options** are shuffled automatically with a fixed seed. Write them in any order, and never refer to an option by its position in explanations.
+- **Review switches:** `case.html?id=<id>&goto=mechanism&mstep=4` opens the first mechanism at step 4 (or `goto=trial`, `goto=custom`, …); `&theme=dark` forces dark mode; `&reveal=1` unlocks predict-gated results. Screenshot with headless Chrome at `--window-size=1300,1000`.
+
+## 8. Check your work (required, repeatedly)
 
 ```bash
 cd ~/biotech-case-files && shared/check.sh <id>          # light and dark; or: shared/check.sh <id> light

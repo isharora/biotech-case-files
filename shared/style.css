@@ -66,6 +66,7 @@ main { min-width: 0; }
 @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } .hero .emblem { max-width: 240px; } }
 .badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; }
 .badge.success { background: var(--win-s); color: var(--ink); } .badge.success::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--win); }
+.badge.frontier { background: var(--il-6s); color: var(--ink); } .badge.frontier::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--il-6); }
 .badge.failure { background: var(--loss-s); color: var(--ink); } .badge.failure::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--loss); }
 .hero h1 { font: 700 44px/1.1 var(--serif); margin: 14px 0 6px; letter-spacing: -.01em; }
 .hero .generic { font-size: 18px; color: var(--ink-2); margin-bottom: 14px; }
